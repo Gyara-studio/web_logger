@@ -1,9 +1,3 @@
-//! A logger that prints all messages in browser's console.
-
-extern crate log;
-#[macro_use]
-extern crate stdweb;
-
 use log::{
     Log,
     Level,
@@ -13,24 +7,30 @@ use log::{
 };
 
 mod console {
+    use wasm_bindgen::JsValue;
     pub(super) fn trace(message: &str) {
-        js! { @(no_return) console.log(@{message}); }
+        let msg = JsValue::from_str(message);
+        web_sys::console::log_1(&msg);
     }
 
     pub(super) fn debug(message: &str) {
-        js! { @(no_return) console.debug(@{message}); }
+        let msg = JsValue::from_str(message);
+        web_sys::console::debug_1(&msg);
     }
 
     pub(super) fn info(message: &str) {
-        js! { @(no_return) console.info(@{message}); }
+        let msg = JsValue::from_str(message);
+        web_sys::console::info_1(&msg);
     }
 
     pub(super) fn warn(message: &str) {
-        js! { @(no_return) console.warn(@{message}); }
+        let msg = JsValue::from_str(message);
+        web_sys::console::warn_1(&msg);
     }
 
     pub(super) fn error(message: &str) {
-        js! { @(no_return) console.error(@{message}); }
+        let msg = JsValue::from_str(message);
+        web_sys::console::error_1(&msg);
     }
 }
 
